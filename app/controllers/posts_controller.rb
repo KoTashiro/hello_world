@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class PostsController < ApplicationController
   before_action :require_login
 
@@ -29,7 +31,14 @@ class PostsController < ApplicationController
       render 'edit'
     end
   end
-  
+
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    Dir.rmdir("#{Rails.root.to_s}/public/uploads/post/image/#{post.id}")
+    flash.now[:danger] = "投稿を削除しました。"
+    redirect_to '/'
+  end
 
   private
 
