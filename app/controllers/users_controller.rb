@@ -29,13 +29,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    user = User.find(params[:id])
+    user.posts.each { |post| post.delete_with_image }
+    user.destroy
+    redirect_to '/'
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation)
   end
 
-end
 
 
 
