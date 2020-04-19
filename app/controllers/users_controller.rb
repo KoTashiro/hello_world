@@ -35,6 +35,7 @@ class UsersController < ApplicationController
     user.destroy
     redirect_to '/'
   end
+
   private
 
   def user_params
@@ -42,8 +43,6 @@ class UsersController < ApplicationController
                                  :password_confirmation)
   end
 
-
-end
 
 
 

@@ -2,6 +2,10 @@
   <div class="row">
     <% if current_user %>
       <div class="col-md-10 col-md-offset-1 text-center">
+        <%= form_tag('/', method: :post) do %>
+          <%= text_field_tag :query %>
+          <%= submit_tag "検索" %>
+        <% end %>
         <h3>一覧</h3>
         <table class="table table-bordered">
           <thead>
@@ -10,6 +14,7 @@
               <th></th>
               <th>タイトル</th>
               <th>内容</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -17,9 +22,11 @@
               <tr>
                 <td><%= post.id %></td>
                 <td><%= image_tag post.image.url, class: 'thum_image' %></td>
-                <td><%= post.title %></td>
                 <td><%= link_to post.title, edit_post_path(post.id) %></td>
                 <td><%= post.description %></td>
+                <td>
+                  <%= link_to '削除', post, class: 'btn btn-danger', method: :delete, data: { confirm: 'この投稿を削除しますか？' } %>
+                </td>
               </tr>
             <% end %>
           </tbody>
