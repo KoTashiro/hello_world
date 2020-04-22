@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HelloWorldApp</title>
+    <title>Stitched</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <%= javascript_include_tag 'application', 'data-turbo-links-track': 'reload' %>
+    <meta name="viewport" content="width=device-width">
 
   <body>
-    <header class="navbar navbar-inverse">
+    <!-- ナビゲーションバー -->
+    <header class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
       <div class="container">
-        <%= link_to "サンプルアプリケーション（仮）", '/', id: "logo" %>
+        <%= link_to 'Stitched', '/', class: 'navbarーbrand text-white h3 m-0' %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <% if current_user %>
-              <li><%= link_to '新規投稿', new_post_path %></li>
-              <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
-              <li><%= link_to 'ユーザ情報編集', edit_user_path(current_user.id) %></li>
+              <li><%= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link m-0' %></li>
             <% else %>
-              <li><%= link_to 'ログイン', login_path %></li>
+              <li><%= link_to 'ログイン', login_path, class: 'nav-link m-0' %></li>
             <% end %>
           </ul>
         </nav>
