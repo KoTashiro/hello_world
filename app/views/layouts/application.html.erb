@@ -24,9 +24,16 @@
       </div>
     </header>
     <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>" role="alert"><%= value %></div>
+      <div class="mb-0 alert alert-<%= key %>" role="alert"><%= value %></div>
     <% end %>
 
     <%= yield %>
+
+    <footer class="py-4 bg-dark text-light">
+      <div class="container text-center">
+          <small>Copyright &copy;2020 タシロ刺繍, All Rights Reserved.</small>
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
