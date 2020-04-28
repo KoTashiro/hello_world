@@ -1,25 +1,96 @@
-<div class="post-new-wrapper" >
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h1 class="text-center">新規投稿</h1>
-        <%= form_for @post do |f| %>
-          <div class="form-group">
-            <%= f.label :トップ画像 %>
-            <%= f.file_field :image%>
-          </div>
+<% thread_array = [] %>
+<% thread_array << {thread: "1114", caption: "オレンジ①"} %>
+<% thread_array << {thread: "1005", caption: "ピンク①"}  %>
+<% thread_array << {thread: "1359", caption: "ピンク②"} %>
+<% thread_array << {thread: "9922", caption: "レッド①"} %>
+<% thread_array << {thread: "1060", caption: "グリーン②"} %>
+<% thread_array << {thread: "1403", caption: "グリーン③"} %>
+<% thread_array << {thread: "1106", caption: "ゴールド①"} %>
+<% thread_array << {thread: "1031", caption: "シルバー①"} %>
+<% thread_array << {thread: "1141", caption: "グレー①"} %>
+<% thread_array << {thread: "1809", caption: "パープル①"} %>
+<% thread_array << {thread: "1128", caption: "パープル②"} %>
+<% thread_array << {thread: "1246", caption: "ブルー①"} %>
+<% thread_array << {thread: "1505", caption: "ブルー②"} %>
+<% thread_array << {thread: "1508", caption: "ブルー③"} %>
+<% thread_array << {thread: "1509", caption: "ブルー④"} %>
+<% thread_array << {thread: "1044", caption: "ブルー⑤"} %>
 
-          <div class="form-group">
-            <%= f.label :タイトル %>
-            <%= f.text_field :title, class: 'form-control' %>
-            <%= f.label :内容 %>
-            <%= f.text_area :description, class: 'form-control' %>
-          </div>
-
-          <%= f.submit '投稿', class: 'btn btn-black btn-block' %>
-
-        <% end %>
+<div class="container text-black-50 bg-light py-4 my-sm-5 shadow-sm">
+  <form>
+  <h3>名入れ情報の入力</h3>
+  <div class="border-bottom border-primary d-block mb-3"></div>
+  <%= form_for @post do |f| %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <div class="form-group row">
+      <%= f.label :お子様のお名前, class: "col-sm-3 col-form-label", for: "inputChild" %>
+      <div class="col-sm-9">
+        <%= f.text_field :child_name, class: "form-control mb-2", id: "inputChild" %>
       </div>
     </div>
-  </div>
+
+    <div class="form-group row">
+      <%= f.label :ふりがな, class: "col-sm-3 col-form-label", for: "inputRuby" %>
+      <div class="col-sm-9">
+        <%= f.text_field :ruby_name, class: "form-control mb-2", id: "inputRuby" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-3">オプション</div>
+      <div class="col-sm-9">
+        <div class="form-check">
+          <%= f.check_box :need_ruby, { class: "form-check-input mb-2", type: "checkbox", id: "check1" }, checked_value = true, unchecked_value = false %>
+          <%= f.label :ふりがなをつける, class: "form-check-label", for: "check1" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-3">オプション</div>
+      <div class="col-sm-9">
+        <div class="form-check">
+          <%= f.check_box :need_space, { class: "form-check-input mb-2", type: "ckeckbox", id: "check2" }, checked_value = true, unchecked_value = false %>
+          <%= f.label :苗字と名前の間を離す, class: "form-check-label", for: "check2" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <script>
+      $(function(){
+        $('#select-thread').change(function() {
+          var text = $(this).val();
+          $('#pic-imagei').attr('src', "/images/" + text + ".png" )
+          console.log("/images/" + text + ".png")
+        });
+        $('#select-font').change(function() {
+          var text = $(this).val();
+          $('#pic-image2').attr('src', "/images/" + text + ".png" )
+          console.log("/images/" + text + ".png")
+        });
+      });
+      </script>
+      <%= f.label :糸色, class: "col-sm-3 col-form-label" %>
+      <div class="col-sm-9">
+        <%= f.select :thread_color, options_for_select(thread_array.map{|c|[c [:caption], c[:thread]]}), {}, {class: 'form-control', id: 'select-thread'} %> 
+        <%= image_tag '/images/1114.png', id: 'pic-imagei', class: 'py-2 image-thumbnail'  %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= f.label :書体, class: "col-sm-3 col-form-label" %>
+      <div class="col-sm-9">
+        <%= f.select :font_name, ['楷書','行書','明朝','丸ゴシック','ゴシック'], {}, { class: 'form-control', id: 'select-font' } %>
+        <%= image_tag '/images/楷書.png', id: 'pic-image2', class: 'py-2 image-thumbnail'  %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <%= f.submit '登録する >>', class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+  </form>
 </div>

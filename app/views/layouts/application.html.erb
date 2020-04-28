@@ -11,10 +11,16 @@
     <!-- ナビゲーションバー -->
     <header class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
       <div class="container">
-        <%= link_to 'Stitched', '/', class: 'navbarーbrand text-white h3 m-0' %>
+        <% if current_user %>
+          <%= link_to 'Stitched', '/pages', class: 'navbarーbrand text-white h3 m-0' %>
+        <% else %>
+          <%= link_to 'Stitched', '/', class: 'navbarーbrand text-white h3 m-0' %>
+        <% end %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <% if current_user %>
+              <li><%= link_to '新規受付', new_post_path(current_user.id), class: 'nav-link m0' %></li>
+              <li><%= link_to 'ユーザ情報更新', edit_user_path(current_user.id), class: 'nav-link m0' %></li>
               <li><%= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link m-0' %></li>
             <% else %>
               <li><%= link_to 'ログイン', login_path, class: 'nav-link m-0' %></li>

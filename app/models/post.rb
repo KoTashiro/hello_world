@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   validates :user_id, presence: true
-  validates :title, presence: true
-  validates :description, presence: true
-  validates :image, presence: true
+  validates :child_name, presence: true
+  validates :thread_color, presence: true, length: { maximum: 4 }
+  validates :font_name, presence: true
 
   belongs_to :user
 
