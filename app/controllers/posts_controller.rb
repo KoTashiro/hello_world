@@ -3,15 +3,16 @@ require 'fileutils'
 class PostsController < ApplicationController
   before_action :require_login
 
+
   def new
     @post = Post.new
   end
 
   def create
-    @post = current_user.posts.new(post_params)
+    @post = Post.new(post_params)
 
     if @post.save
-      redirect_to '/', success: '投稿しました。'
+      redirect_to '/pages', success: '投稿しました。'
     else
       flash.now[:danger] = "投稿に失敗しました"
       render :new
@@ -25,7 +26,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
-      redirect_to '/'
+      redirect_to '/pages'
     else
       flash.now[:danger] = "編集に失敗しました"
       render 'edit'
@@ -37,13 +38,13 @@ class PostsController < ApplicationController
     post.destroy
     Dir.rmdir("#{Rails.root.to_s}/public/uploads/post/image/#{post.id}")
     flash.now[:danger] = "投稿を削除しました。"
-    redirect_to '/'
+    redirect_to '/pages'
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:image, :title, :description)
+    params.require(:post).permit(:child_name, :ruby_name,:need_ruby, :need_space, :thread_color, :font_name)
   end
 
   def require_login
