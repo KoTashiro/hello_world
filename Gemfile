@@ -76,4 +76,4 @@ group :development, :test do
 end
 
 # ページネーションを追加
-gem 'kaminari', '~> 0.17.0'
+gem 'kaminari', '~> 1.2.1'
